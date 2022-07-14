@@ -35,17 +35,22 @@ const Form = ({ currentId, setCurrentId}) => {
             dispatch(createPost(postData));
         }
 
+        clear();
+
     }
 
     const clear = () => {
-
+        setCurrentId = null;
+        setPostData({
+            creator: '', title: '', message: '', tags: '', selectedfile: ''
+        });
     }
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">
-                    Creating a Memory
+                    {currentId ? 'Editing': 'Creating'} a memory
                 </Typography>
 
                 <TextField name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator}onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
